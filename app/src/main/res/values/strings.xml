@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PizzaTestApp</string>
+    <string name="order_details_title_pizzas">Pizzas</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.axel_stein.pizzatestapp.ui.splash
+package com.axel_stein.pizzatestapp.ui.screens.splash
 
 import android.os.Bundle
 import android.view.View

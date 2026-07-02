@@ -1,0 +1,8 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.PizzaTestApp" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="appAccentColor">@color/accent_dark</item>
+        <item name="appActiveColor">@color/active_dark</item>
+        <item name="appTextColor">@color/text_dark</item>
+        <item name="appHighlightColor">@color/highlight_dark</item>
+    </style>
+</resources>

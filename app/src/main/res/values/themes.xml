@@ -2,7 +2,51 @@
     <style name="Base.Theme.PizzaTestApp" parent="Theme.Material3.Light.NoActionBar">
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
         <item name="android:windowBackground">@color/window_background_light</item>
+        <item name="appAccentColor">@color/accent_light</item>
+        <item name="appActiveColor">@color/active_light</item>
+        <item name="appTextColor">@color/text_light</item>
+        <item name="appHighlightColor">@color/highlight_light</item>
     </style>
 
     <style name="Theme.PizzaTestApp" parent="Base.Theme.PizzaTestApp" />
+
+    <style name="Fab">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:background">@drawable/bg_fab</item>
+        <item name="android:elevation">4dp</item>
+        <item name="android:tint">?attr/appActiveColor</item>
+    </style>
+
+    <style name="TextHeader1">
+        <item name="android:fontFamily">@font/figtree_light</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">?attr/appActiveColor</item>
+    </style>
+
+    <style name="TextHeader2">
+        <item name="android:fontFamily">@font/figtree_semi_bold</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">?attr/appActiveColor</item>
+    </style>
+
+    <style name="TextHeader3">
+        <item name="android:fontFamily">@font/figtree_bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineHeight">18sp</item>
+        <item name="android:textColor">?attr/appActiveColor</item>
+    </style>
+
+    <style name="TextCaption">
+        <item name="android:fontFamily">@font/figtree_regular</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:lineHeight">12sp</item>
+        <item name="android:textColor">?attr/appTextColor</item>
+    </style>
+
+    <style name="TextBody">
+        <item name="android:fontFamily">@font/figtree_regular</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">?attr/appTextColor</item>
+    </style>
 </resources>

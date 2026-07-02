@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="appAccentColor" format="color"/>
+    <attr name="appActiveColor" format="color"/>
+    <attr name="appTextColor" format="color"/>
+    <attr name="appHighlightColor" format="color"/>
+</resources>
