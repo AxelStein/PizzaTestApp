@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:clipToPadding="false"
+    android:clipChildren="false">
+
+    <LinearLayout
+        android:background="@drawable/bg_stepper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/btnDecrement"
+            style="@style/Fab"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_minus"/>
+
+        <TextView
+            android:id="@+id/tvQuantity"
+            style="@style/TextQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_gravity="center_vertical"
+            android:minWidth="48dp"
+            android:text="1"/>
+
+        <ImageView
+            android:id="@+id/btnIncrement"
+            style="@style/Fab"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_plus"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvPrice"
+        style="@style/TextQuantity"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:text="$4.55"/>
+
+    <TextView
+        style="@style/PrimaryButton"
+        android:layout_gravity="center_vertical"
+        android:text="@string/btn_add"/>
+
+</LinearLayout>

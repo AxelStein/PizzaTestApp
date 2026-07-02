@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Space
+        android:id="@+id/circle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="@dimen/highlight_circle_diameter"
+        android:layout_height="@dimen/highlight_circle_diameter"/>
+
+    <Space
+        android:id="@+id/centerAnchor"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        app:layout_constraintBottom_toBottomOf="@id/circle"
+        app:layout_constraintTop_toTopOf="@id/circle"
+        app:layout_constraintEnd_toEndOf="@id/circle"
+        app:layout_constraintStart_toStartOf="@id/circle"/>
+
+    <androidx.wear.widget.CurvedTextView
+        style="@style/TextBody"
+        android:textColor="?attr/appActiveColor"
+        android:layout_marginTop="-15dp"
+        app:layout_constraintTop_toTopOf="@id/imageForScale"
+        android:layout_marginStart="-10dp"
+        android:text="@string/product_details_hint_scale"
+        app:anchorAngleDegrees="0"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"/>
+
+    <ImageView
+        android:id="@+id/imageForScale"
+        tools:background="#eee"
+        android:layout_width="97dp"
+        android:layout_height="63dp"
+        android:rotation="180"
+        android:layout_marginBottom="-16dp"
+        app:layout_constraintBottom_toTopOf="@id/fabSizeMedium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/fabSizeSmall"
+        style="@style/Fab.PizzaSize"
+        android:text="S"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintCircle="@id/centerAnchor"
+        app:layout_constraintCircleAngle="200"
+        app:layout_constraintCircleRadius="300dp"/>
+
+    <TextView
+        android:id="@+id/fabSizeMedium"
+        style="@style/Fab.PizzaSize"
+        android:text="M"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintCircle="@id/centerAnchor"
+        app:layout_constraintCircleAngle="180"
+        app:layout_constraintCircleRadius="300dp"/>
+
+    <TextView
+        android:id="@+id/fabSizeLarge"
+        style="@style/Fab.PizzaSize"
+        android:text="L"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintCircle="@id/centerAnchor"
+        app:layout_constraintCircleAngle="160"
+        app:layout_constraintCircleRadius="300dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

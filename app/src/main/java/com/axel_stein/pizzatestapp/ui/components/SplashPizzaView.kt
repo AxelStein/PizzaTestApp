@@ -1,9 +1,7 @@
 package com.axel_stein.pizzatestapp.ui.components
 
-import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.RectF
 import android.os.Handler
@@ -12,14 +10,14 @@ import android.os.Message
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.graphics.withClip
-import coil.load
+import com.axel_stein.pizzatestapp.ext.loadAsset
 
 class SplashPizzaView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : AppCompatImageView(context, attrs, defStyleAttr) {
 
     companion object {
-        private const val STEP_DURATION_MS = 800L
+        private const val STEP_DURATION_MS = 200L
         private const val MSG_NEXT_STEP = 0xF1
     }
 
@@ -35,9 +33,6 @@ class SplashPizzaView @JvmOverloads constructor(
     private var currentSweepIndex = 0
     private val handler = object : Handler(Looper.getMainLooper()) {
         override fun handleMessage(msg: Message) {
-            alphaAnimator.cancel()
-            alphaAnimator.start()
-
             if (currentSweepIndex == sweepAngles.size) {
                 currentSweepIndex = 0
             }
@@ -49,30 +44,17 @@ class SplashPizzaView @JvmOverloads constructor(
         }
     }
 
-    private val layerPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val layerBounds = RectF()
-
-    private val alphaAnimator = ValueAnimator.ofInt(0, 255).apply {
-        duration = STEP_DURATION_MS
-        addUpdateListener {
-            layerPaint.alpha = it.animatedValue as Int
-            postInvalidateOnAnimation()
-        }
-    }
-
     override fun onFinishInflate() {
         super.onFinishInflate()
-        load("file:///android_asset/splash.png")
+        loadAsset("splash.png")
     }
 
     override fun onWindowVisibilityChanged(visibility: Int) {
         super.onWindowVisibilityChanged(visibility)
         if (visibility == VISIBLE) {
             handler.sendEmptyMessageDelayed(MSG_NEXT_STEP, STEP_DURATION_MS)
-            alphaAnimator.start()
         } else {
             handler.removeCallbacksAndMessages(null)
-            alphaAnimator.cancel()
         }
     }
 
@@ -99,21 +81,7 @@ class SplashPizzaView @JvmOverloads constructor(
         }
     }
 
-    private fun drawAlphaLayer(canvas: Canvas, block: Canvas.() -> Unit) {
-        setupPath(path, currentSweepAngle + 45f)
-
-        layerBounds.set(0f, 0f, width.toFloat(), height.toFloat())
-        canvas.saveLayer(layerBounds, layerPaint)
-
-        canvas.withClip(path, block)
-        canvas.restore()
-    }
-
     override fun onDraw(canvas: Canvas) {
-        drawAlphaLayer(canvas) {
-            super.onDraw(canvas)
-        }
-
         setupPath(path, currentSweepAngle)
         canvas.withClip(path) {
             super.onDraw(canvas)

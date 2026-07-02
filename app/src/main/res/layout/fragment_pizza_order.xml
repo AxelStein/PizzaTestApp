@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:layout_marginTop="-80dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/circle_highlight"
+        android:layout_width="@dimen/highlight_circle_diameter"
+        android:layout_height="@dimen/highlight_circle_diameter"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="@dimen/toolbar_vertical_padding"
+        app:layout_constraintTop_toTopOf="parent">
+        
+        <ImageView
+            android:id="@+id/btnNavigateUp"
+            style="@style/Fab"
+            android:src="@drawable/ic_navigate_up"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvPizzas"
+            style="@style/TextCaption"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/order_details_title_pizzas"
+            app:layout_constraintBottom_toTopOf="@id/tvPizzaName"
+            app:layout_constraintEnd_toStartOf="@id/btnFavorite"
+            app:layout_constraintStart_toEndOf="@id/btnNavigateUp"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvPizzaName"
+            style="@style/TextHeader2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="Pepperoni Blast"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnFavorite"
+            app:layout_constraintStart_toEndOf="@id/btnNavigateUp"
+            app:layout_constraintTop_toBottomOf="@id/tvPizzas"/>
+
+        <ImageView
+            android:id="@+id/btnFavorite"
+            style="@style/Fab"
+            android:src="@drawable/ic_favorite_empty"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/pagerProductImages"
+        android:clipChildren="false"
+        tools:listitem="@layout/item_pizza_image"
+        android:layout_marginTop="20dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="horizontal"
+        android:overScrollMode="never"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout_height="@dimen/pizza_image_height"/>
+
+    <com.axel_stein.pizzatestapp.ui.components.PizzaSizeLayout
+        android:id="@+id/pizzaSizeLayout"
+        android:layout_marginTop="-80dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvDescription"
+        style="@style/TextProductDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="The combination of perfectly melted mozzarella cheese, tangy tomato sauce, and a crispy yet chewy crust creates a harmonious balance that leaves you wanting more. "
+        app:layout_constraintTop_toBottomOf="@id/pizzaSizeLayout"/>
+
+    <com.axel_stein.pizzatestapp.ui.components.QuantityStepper
+        android:clipChildren="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginHorizontal="24dp"
+        android:id="@+id/quantityStepper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
