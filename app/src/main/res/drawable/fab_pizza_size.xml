@@ -3,6 +3,8 @@
 
     <item android:state_selected="true" android:drawable="@drawable/fab_pizza_size_selected"/>
 
+    <item android:state_enabled="false" android:drawable="@drawable/fab_disabled"/>
+
     <item android:drawable="@drawable/fab"/>
 
 </selector>

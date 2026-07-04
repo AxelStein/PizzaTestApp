@@ -3,4 +3,7 @@
     <string name="order_details_title_pizzas">Pizzas</string>
     <string name="product_details_hint_scale">Banana for scale</string>
     <string name="btn_add">Add</string>
+    <string name="size_small">S</string>
+    <string name="size_medium">M</string>
+    <string name="size_large">L</string>
 </resources>

@@ -6,6 +6,7 @@ import com.axel_stein.pizzatestapp.domain.model.PizzaSize
 import com.axel_stein.pizzatestapp.domain.repository.PizzaRepository
 import com.axel_stein.pizzatestapp.ui.components.QuantityStepper
 import com.axel_stein.pizzatestapp.ui.screens.pizza_order.model.PizzaOrder
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -32,6 +33,8 @@ class PizzaOrderViewModel : ViewModel(), KoinComponent, QuantityStepper.EventLis
     private fun loadPizzas() {
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
+
+            delay(2000)
 
             repository.getPizzas()
                 .onSuccess { data ->
@@ -114,4 +117,6 @@ class PizzaOrderViewModel : ViewModel(), KoinComponent, QuantityStepper.EventLis
     override fun onDecrementQuantityClick() {
         decrementQuantity()
     }
+
+    override fun onAddClick() {}
 }

@@ -18,7 +18,16 @@ class PizzaSizeLayout @JvmOverloads constructor(
 
     var onSizeChanged: ((PizzaSize) -> Unit)? = null
 
-    var pizzaSize: PizzaSize? = null
+    var availableSizes: List<PizzaSize>? = null
+        set(value) {
+            field = value
+            val set = value?.toSet()
+            binding.fabSizeSmall.isEnabled = set?.contains(PizzaSize.Small) == true
+            binding.fabSizeMedium.isEnabled = set?.contains(PizzaSize.Medium) == true
+            binding.fabSizeLarge.isEnabled = set?.contains(PizzaSize.Large) == true
+        }
+
+    var currentSize: PizzaSize? = null
         set(value) {
             if (field == value) return
             field = value
@@ -27,11 +36,8 @@ class PizzaSizeLayout @JvmOverloads constructor(
             binding.fabSizeLarge.setFabSelected(value == PizzaSize.Large)
         }
 
-    override fun onFinishInflate() {
-        super.onFinishInflate()
+    init {
         addView(binding.root)
-
-        binding.imageForScale.loadAsset("banana.png")
 
         binding.fabSizeSmall.tag = PizzaSize.Small
         binding.fabSizeSmall.setOnClickListener(::onFabClick)
@@ -41,6 +47,8 @@ class PizzaSizeLayout @JvmOverloads constructor(
 
         binding.fabSizeLarge.tag = PizzaSize.Large
         binding.fabSizeLarge.setOnClickListener(::onFabClick)
+
+        binding.imageForScale.loadAsset("banana.png")
     }
 
     private fun onFabClick(fab: View) {
@@ -50,7 +58,6 @@ class PizzaSizeLayout @JvmOverloads constructor(
 }
 
 private fun View.setFabSelected(selected: Boolean) {
-    if (isSelected == selected) return
     isSelected = selected
-    elevation = if (selected) 0f else 4f.dpToPx(context)
+    elevation = if (selected || !isEnabled) 0f else 4f.dpToPx(context)
 }

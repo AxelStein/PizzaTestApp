@@ -52,6 +52,7 @@ class SplashPizzaView @JvmOverloads constructor(
     override fun onWindowVisibilityChanged(visibility: Int) {
         super.onWindowVisibilityChanged(visibility)
         if (visibility == VISIBLE) {
+            currentSweepIndex = 0
             handler.sendEmptyMessageDelayed(MSG_NEXT_STEP, STEP_DURATION_MS)
         } else {
             handler.removeCallbacksAndMessages(null)

@@ -13,6 +13,7 @@ class QuantityStepper @JvmOverloads constructor(
     interface EventListener {
         fun onIncrementQuantityClick()
         fun onDecrementQuantityClick()
+        fun onAddClick()
     }
 
     private val binding = LayoutQuantityStepperBinding.inflate(LayoutInflater.from(context), this, false)
@@ -26,6 +27,9 @@ class QuantityStepper @JvmOverloads constructor(
         }
         binding.btnDecrement.setOnClickListener {
             eventListener?.onDecrementQuantityClick()
+        }
+        binding.btnAdd.setOnClickListener {
+            eventListener?.onAddClick()
         }
     }
 

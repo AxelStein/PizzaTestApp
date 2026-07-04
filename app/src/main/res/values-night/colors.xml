@@ -1,0 +1,7 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="window_background">#13151E</color>
+    <color name="accent">#FFA900</color>
+    <color name="active">#FFFFFF</color>
+    <color name="base_text">#8D8E99</color>
+    <color name="highlight">#8D8E99</color>
+</resources>

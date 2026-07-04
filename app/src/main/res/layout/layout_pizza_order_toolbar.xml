@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:translationX="-100dp"
+        android:id="@+id/btnNavigateUp"
+        style="@style/Fab"
+        android:src="@drawable/ic_navigate_up"/>
+
+    <LinearLayout
+        android:translationY="-100dp"
+        android:id="@+id/nameLayout"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvPizzas"
+            style="@style/TextCaption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/order_details_title_pizzas"/>
+
+        <com.axel_stein.pizzatestapp.ui.components.SwapTextLayout
+            android:id="@+id/pizzaName"
+            style="@style/TextHeader2"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:maxLines="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:translationX="100dp"
+        android:id="@+id/btnFavorite"
+        style="@style/Fab"
+        android:src="@drawable/ic_favorite_empty"/>
+
+</LinearLayout>

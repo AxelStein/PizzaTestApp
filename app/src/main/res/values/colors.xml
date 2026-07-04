@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="window_background_light">#FFFFFF</color>
-    <color name="window_background_dark">#13151E</color>
-    <color name="accent_light">#19C4EA</color>
-    <color name="accent_dark">#FFA900</color>
-    <color name="active_light">#000000</color>
-    <color name="active_dark">#FFFFFF</color>
-    <color name="text_light">#B3000000</color>
-    <color name="text_dark">#8D8E99</color>
-    <color name="highlight_light">#F3E3DA</color>
-    <color name="highlight_dark">#8D8E99</color>
+    <color name="window_background">#FFFFFF</color>
+    <color name="accent">#19C4EA</color>
+    <color name="active">#000000</color>
+    <color name="base_text">#B3000000</color>
+    <color name="highlight">#F3E3DA</color>
+    <color name="fab_disabled">#eee</color>
+    <color name="fab_pizza_size_selected">#000</color>
 </resources>

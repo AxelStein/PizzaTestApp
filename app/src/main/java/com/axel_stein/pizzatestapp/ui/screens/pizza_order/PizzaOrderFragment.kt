@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -73,13 +74,18 @@ class PizzaOrderFragment : Fragment(R.layout.fragment_pizza_order) {
         productImageAdapter.submitList(state.items)
 
         state.currentItem?.let { currentItem ->
+            toolbar.shouldAppear = true
+            root.shouldAppear = true
+            splashView.isVisible = state.isLoading
+
             quantityStepper.setQuantity(currentItem.quantity.toString())
             quantityStepper.setPrice(currentItem.price)
 
-            tvPizzaName.text = currentItem.pizza.name
-            tvDescription.text = currentItem.pizza.description
+            toolbar.setPizzaName(currentItem.pizza.name)
+            tvDescription.setText(currentItem.pizza.description)
 
-            pizzaSizeLayout.pizzaSize = currentItem.size
+            pizzaSizeLayout.availableSizes = currentItem.pizza.variants?.mapNotNull { it.size }
+            pizzaSizeLayout.currentSize = currentItem.size
         }
     }
 }

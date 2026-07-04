@@ -11,16 +11,4 @@
         android:layout_width="@dimen/pizza_image_height"
         android:layout_height="@dimen/pizza_image_height"/>
 
-    <ImageView
-        android:layout_gravity="center"
-        android:src="@drawable/circle_blur"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_find"
-        android:layout_gravity="center"/>
-
 </FrameLayout>

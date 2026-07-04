@@ -6,7 +6,7 @@ import android.view.animation.OvershootInterpolator
 import androidx.appcompat.widget.AppCompatImageView
 import com.axel_stein.pizzatestapp.domain.model.PizzaSize
 import com.axel_stein.pizzatestapp.ext.findActivity
-import com.axel_stein.pizzatestapp.ui.components.zoomy.ZoomTouchListener
+import com.axel_stein.pizzatestapp.ui.components.zoomy.ZoomTouchHandler
 
 class PizzaImageView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -30,7 +30,7 @@ class PizzaImageView @JvmOverloads constructor(
             animate()
                 .scaleX(value.scale)
                 .scaleY(value.scale)
-                .setInterpolator(OvershootInterpolator(1f))
+                .setInterpolator(OvershootInterpolator())
                 .setDuration(400)
                 .start()
         }
@@ -45,7 +45,7 @@ class PizzaImageView @JvmOverloads constructor(
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         context.findActivity()?.let {
-            ZoomTouchListener.Builder(it)
+            ZoomTouchHandler.Builder(it)
                 .setTarget(this)
                 .register()
         }

@@ -3,6 +3,6 @@
 
     <item android:color="#fff" android:state_selected="true"/>
 
-    <item android:color="?attr/appActiveColor"/>
+    <item android:color="@color/active"/>
 
 </selector>
