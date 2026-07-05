@@ -17,10 +17,11 @@
 
     <ImageView
         android:id="@+id/imageForScale"
-        android:layout_width="97dp"
-        android:layout_height="63dp"
+        app:layout_constraintWidth_percent="0.2587"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:rotation="180"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>

@@ -20,7 +20,7 @@
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/pagerProductImages"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/pizza_image_height"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:alpha="0"
         android:clipChildren="false"

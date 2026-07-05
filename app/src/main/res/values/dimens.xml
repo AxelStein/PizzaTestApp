@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="pizza_image_height">274dp</dimen>
     <dimen name="toolbar_vertical_padding">18dp</dimen>
     <dimen name="pizza_order_bottom_padding">16dp</dimen>
     <dimen name="highlight_circle_diameter">600dp</dimen>

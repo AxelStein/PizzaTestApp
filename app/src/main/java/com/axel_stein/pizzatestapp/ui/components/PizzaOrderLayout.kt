@@ -74,7 +74,6 @@ class PizzaOrderLayout @JvmOverloads constructor(
                     pizzaSizeLayout.translationY = parentHeight - pizzaSizeLayout.top
                     tvDescription.translationY = parentHeight - tvDescription.top
                 }
-                createArcPathFromFabs()
             }
         }
 
@@ -92,6 +91,7 @@ class PizzaOrderLayout @JvmOverloads constructor(
 
         binding.pagerProductImages.apply {
             (getChildAt(0) as? ViewGroup)?.let {
+                it.overScrollMode = OVER_SCROLL_NEVER
                 it.clipChildren = false
             }
             setPageTransformer(CenterScalePageTransformer())
@@ -185,6 +185,11 @@ class PizzaOrderLayout @JvmOverloads constructor(
             .start()
     }
 
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        super.onLayout(changed, left, top, right, bottom)
+        createArcPathFromFabs()
+    }
+
     override fun onImageZoomStarted() = binding.run {}
 
     override fun onImageZoomed(progress: Float) = binding.run {
@@ -192,6 +197,7 @@ class PizzaOrderLayout @JvmOverloads constructor(
 
         toolbar.translationY = -(toolbar.height * progress)
         zoomHintLayout.alpha = 1f - progress
+        pagerProductImages.alpha = 1f - progress
 
         listOf(quantityStepper, tvDescription, pizzaSizeLayout).forEach { v ->
             v.translationY = (parentHeight - v.top) * progress
@@ -204,6 +210,7 @@ class PizzaOrderLayout @JvmOverloads constructor(
         pizzaSizeLayout.animateResetTranslationY()
         tvDescription.animateResetTranslationY()
         zoomHintLayout.alpha = 1f
+        pagerProductImages.alpha = 1f
     }
 
     private fun View.animateResetTranslationY() {

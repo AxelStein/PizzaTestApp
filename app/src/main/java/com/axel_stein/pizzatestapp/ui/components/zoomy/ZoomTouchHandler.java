@@ -31,7 +31,7 @@ public class ZoomTouchHandler implements View.OnTouchListener, ScaleGestureDetec
     private static final int STATE_POINTER_DOWN = 1;
     private static final int STATE_ZOOMING = 2;
     private static final float MIN_SCALE_FACTOR = 1f;
-    private static final float MAX_SCALE_FACTOR = 4f;
+    private float MAX_SCALE_FACTOR = 4f;
 
     public static class Builder {
         private final Activity activity;
@@ -181,6 +181,7 @@ public class ZoomTouchHandler implements View.OnTouchListener, ScaleGestureDetec
 
     private void startZoomingView(View view) {
         this.mScaleFactor = mTarget.getScaleX();
+        MAX_SCALE_FACTOR = 4f / mScaleFactor;
 
         mZoomableView = new ImageView(mTarget.getContext());
         mZoomableView.setLayoutParams(
