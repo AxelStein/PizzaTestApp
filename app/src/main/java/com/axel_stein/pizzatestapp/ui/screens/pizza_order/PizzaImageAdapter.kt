@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.request.CachePolicy
-import coil.size.Precision
 import com.axel_stein.pizzatestapp.R
 import com.axel_stein.pizzatestapp.databinding.ItemPizzaImageBinding
 import com.axel_stein.pizzatestapp.ui.screens.pizza_order.model.PizzaOrder
@@ -62,13 +61,13 @@ class PizzaImageAdapter : ListAdapter<PizzaOrder, PizzaImageAdapter.ViewHolder>(
     class ViewHolder(val binding: ItemPizzaImageBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: PizzaOrder) {
+            binding.imageView.tag =  item.pizza.imageUrl
             binding.imageView.load(item.pizza.imageUrl) {
                 placeholder(R.drawable.pizza_placeholder)
                 error(R.drawable.pizza_placeholder)
                 crossfade(true)
                 crossfade(600)
                 allowHardware(false)
-                precision(Precision.AUTOMATIC)
                 memoryCachePolicy(CachePolicy.ENABLED)
                 diskCachePolicy(CachePolicy.ENABLED)
             }

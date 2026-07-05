@@ -16,6 +16,12 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import coil.Coil;
+import coil.request.ErrorResult;
+import coil.request.ImageRequest;
+import coil.request.SuccessResult;
+import coil.size.Size;
+
 /**
  * Created by Álvaro Blanco Cabrero on 12/02/2017.
  * <a href="https://github.com/imablanco/Zoomy">Zoomy</a>
@@ -183,7 +189,30 @@ public class ZoomTouchHandler implements View.OnTouchListener, ScaleGestureDetec
                 Math.round(mTarget.getHeight() * mScaleFactor)
             )
         );
-        mZoomableView.setImageBitmap(ViewUtils.getBitmapFromView(view));
+
+        Coil.imageLoader(view.getContext()).enqueue(
+            new ImageRequest.Builder(view.getContext())
+                .data(view.getTag())
+                .allowHardware(false)
+                .size(Size.ORIGINAL)
+                .target(mZoomableView)
+                .listener(new ImageRequest.Listener() {
+                    @Override
+                    public void onCancel(@NonNull ImageRequest request) {}
+
+                    @Override
+                    public void onError(@NonNull ImageRequest request, @NonNull ErrorResult result) {}
+
+                    @Override
+                    public void onStart(@NonNull ImageRequest request) {
+                        mZoomableView.setImageBitmap(ViewUtils.getBitmapFromView(view));
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull ImageRequest request, @NonNull SuccessResult result) {}
+                })
+                .build()
+        );
 
         // show the view in the same coords
         mTargetViewCords = ViewUtils.getViewAbsoluteCords(view);

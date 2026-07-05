@@ -2,6 +2,7 @@ package com.axel_stein.pizzatestapp.ui.components
 
 import android.animation.ValueAnimator
 import android.content.Context
+import android.text.method.ScrollingMovementMethod
 import android.util.AttributeSet
 import android.view.Gravity
 import android.widget.FrameLayout
@@ -24,6 +25,7 @@ class SwapTextLayout @JvmOverloads constructor(
         lp.gravity = Gravity.CENTER_HORIZONTAL
 
         textView.layoutParams = lp
+        textView.movementMethod = ScrollingMovementMethod()
         nextTextView.layoutParams = lp
 
         addView(textView)
@@ -33,6 +35,7 @@ class SwapTextLayout @JvmOverloads constructor(
     fun setText(text: String?) {
         valueAnimator?.cancel()
 
+        textView.scrollY = 0
         nextTextView.text = text
         nextTextView.post {
             val prevX = textView.x
