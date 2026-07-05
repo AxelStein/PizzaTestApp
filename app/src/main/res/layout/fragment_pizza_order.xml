@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.axel_stein.pizzatestapp.ui.components.PizzaOrderLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:clipChildren="false"
-    android:clipToPadding="false"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <com.axel_stein.pizzatestapp.ui.components.SplashPizzaView
         android:id="@+id/splashView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_gravity="center"
         android:layout_marginHorizontal="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -19,85 +16,13 @@
     <com.axel_stein.pizzatestapp.ui.components.ErrorLayout
         android:id="@+id/errorLayout"
         android:layout_marginHorizontal="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <com.axel_stein.pizzatestapp.ui.components.PizzaOrderToolbar
-        android:id="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="parent"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:paddingHorizontal="24dp"
-        android:paddingVertical="@dimen/toolbar_vertical_padding"
+    <com.axel_stein.pizzatestapp.ui.components.PizzaOrderLayout
+        android:id="@+id/orderLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"/>
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:alpha="0"
-        android:id="@+id/pagerProductImages"
-        android:clipChildren="false"
-        tools:listitem="@layout/item_pizza_image"
-        android:layout_marginTop="20dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:orientation="horizontal"
-        android:overScrollMode="never"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/pizza_image_height"/>
-
-    <FrameLayout
-        android:id="@+id/zoomHintLayout"
-        android:alpha="0"
-        app:layout_constraintEnd_toEndOf="@id/pagerProductImages"
-        app:layout_constraintStart_toStartOf="@id/pagerProductImages"
-        app:layout_constraintBottom_toBottomOf="@id/pagerProductImages"
-        app:layout_constraintTop_toTopOf="@id/pagerProductImages"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:layout_gravity="center"
-            android:src="@drawable/circle_blur"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_find"
-            android:layout_gravity="center"/>
-
-    </FrameLayout>
-
-    <com.axel_stein.pizzatestapp.ui.components.SwapTextLayout
-        android:id="@+id/tvDescription"
-        style="@style/TextProductDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:text="The combination of perfectly melted mozzarella cheese, tangy tomato sauce, and a crispy yet chewy crust creates a harmonious balance that leaves you wanting more. "
-        app:layout_constraintTop_toBottomOf="@id/pizzaSizeLayout"/>
-
-    <com.axel_stein.pizzatestapp.ui.components.QuantityStepper
-        android:alpha="0"
-        android:clipChildren="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginHorizontal="24dp"
-        android:id="@+id/quantityStepper"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <com.axel_stein.pizzatestapp.ui.components.PizzaSizeLayout
-        android:id="@+id/pizzaSizeLayout"
-        android:layout_marginTop="24dp"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/pagerProductImages"/>
-
-</com.axel_stein.pizzatestapp.ui.components.PizzaOrderLayout>
+</FrameLayout>

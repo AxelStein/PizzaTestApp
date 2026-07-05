@@ -10,26 +10,18 @@ class QuantityStepper @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
-    interface EventListener {
-        fun onIncrementQuantityClick()
-        fun onDecrementQuantityClick()
-        fun onAddClick()
-    }
-
     private val binding = LayoutQuantityStepperBinding.inflate(LayoutInflater.from(context), this, false)
 
-    var eventListener: EventListener? = null
+    var onIncrementClick: (() -> Unit)? = null
+    var onDecrementClick: (() -> Unit)? = null
 
     init {
         addView(binding.root)
         binding.btnIncrement.setOnClickListener {
-            eventListener?.onIncrementQuantityClick()
+            onIncrementClick?.invoke()
         }
         binding.btnDecrement.setOnClickListener {
-            eventListener?.onDecrementQuantityClick()
-        }
-        binding.btnAdd.setOnClickListener {
-            eventListener?.onAddClick()
+            onDecrementClick?.invoke()
         }
     }
 

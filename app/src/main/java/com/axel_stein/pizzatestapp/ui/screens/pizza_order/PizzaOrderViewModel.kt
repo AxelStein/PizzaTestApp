@@ -4,9 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.axel_stein.pizzatestapp.domain.model.PizzaSize
 import com.axel_stein.pizzatestapp.domain.repository.PizzaRepository
-import com.axel_stein.pizzatestapp.ui.components.QuantityStepper
 import com.axel_stein.pizzatestapp.ui.screens.pizza_order.model.PizzaOrder
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -15,7 +13,7 @@ import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class PizzaOrderViewModel : ViewModel(), KoinComponent, QuantityStepper.EventListener {
+class PizzaOrderViewModel : ViewModel(), KoinComponent {
 
     companion object {
         private const val MAX_QUANTITY = 99
@@ -39,8 +37,6 @@ class PizzaOrderViewModel : ViewModel(), KoinComponent, QuantityStepper.EventLis
             _uiState.update {
                 PizzaOrderUiState(isLoading = true)
             }
-
-            delay(1000)
 
             repository.getPizzas()
                 .onSuccess { data ->
@@ -69,7 +65,7 @@ class PizzaOrderViewModel : ViewModel(), KoinComponent, QuantityStepper.EventLis
         }
     }
 
-    fun onPizzaSwiped(newIndex: Int) {
+    fun swipePizza(newIndex: Int) {
         if (newIndex in _uiState.value.items.indices) {
             _uiState.update {
                 it.copy(currentIndex = newIndex)
@@ -81,7 +77,7 @@ class PizzaOrderViewModel : ViewModel(), KoinComponent, QuantityStepper.EventLis
         updateCurrentItem { it.copy(size = size) }
     }
 
-    private fun incrementQuantity() {
+    fun incrementQuantity() {
         _uiState.value.currentItem?.let { item ->
             if (item.quantity < MAX_QUANTITY) {
                 updateCurrentItem {
@@ -91,7 +87,7 @@ class PizzaOrderViewModel : ViewModel(), KoinComponent, QuantityStepper.EventLis
         }
     }
 
-    private fun decrementQuantity() {
+    fun decrementQuantity() {
         _uiState.value.currentItem?.let { item ->
             if (item.quantity > 1) {
                 updateCurrentItem {
@@ -115,14 +111,4 @@ class PizzaOrderViewModel : ViewModel(), KoinComponent, QuantityStepper.EventLis
             state.copy(items = updatedList)
         }
     }
-
-    override fun onIncrementQuantityClick() {
-        incrementQuantity()
-    }
-
-    override fun onDecrementQuantityClick() {
-        decrementQuantity()
-    }
-
-    override fun onAddClick() {}
 }

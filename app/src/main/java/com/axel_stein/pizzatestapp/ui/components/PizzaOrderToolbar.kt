@@ -26,8 +26,7 @@ class PizzaOrderToolbar @JvmOverloads constructor(
             }
         }
 
-    override fun onFinishInflate() {
-        super.onFinishInflate()
+    init {
         addView(binding.root)
     }
 

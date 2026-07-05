@@ -3,8 +3,7 @@ package com.axel_stein.pizzatestapp.ui.components.zoomy;
 import android.app.Activity;
 import android.graphics.Point;
 import android.graphics.PointF;
-import android.graphics.RectF;
-import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
@@ -19,7 +18,7 @@ import androidx.annotation.Nullable;
 
 /**
  * Created by Álvaro Blanco Cabrero on 12/02/2017.
- * Zoomy.
+ * <a href="https://github.com/imablanco/Zoomy">Zoomy</a>
  */
 public class ZoomTouchHandler implements View.OnTouchListener, ScaleGestureDetector.OnScaleGestureListener {
     private static final int STATE_IDLE = 0;
@@ -56,6 +55,15 @@ public class ZoomTouchHandler implements View.OnTouchListener, ScaleGestureDetec
     private final View mTarget;
     private @Nullable ImageView mZoomableView;
     private final ScaleGestureDetector mScaleGestureDetector;
+    private final GestureDetector mGestureDetector;
+    private final GestureDetector.SimpleOnGestureListener mGestureListener =
+        new GestureDetector.SimpleOnGestureListener() {
+            @Override
+            public boolean onSingleTapUp(@NonNull MotionEvent e) {
+                mTarget.performClick();
+                return true;
+            }
+        };
     private float mScaleFactor = 1f;
     private PointF mCurrentMovementMidPoint = new PointF();
     private PointF mInitialPinchMidPoint = new PointF();
@@ -75,13 +83,10 @@ public class ZoomTouchHandler implements View.OnTouchListener, ScaleGestureDetec
 
             final var touchListener = getZoomTouchListener();
             if (touchListener != null) {
-                touchListener.onZoomEnded();
+                touchListener.onImageZoomEnded();
             }
         }
     };
-    private float prevTop = 0f;
-    private float prevBottom = 0f;
-    private final RectF rect = new RectF();
     private @Nullable ZoomTouchListener zoomTouchListener;
 
     private ZoomTouchHandler(
@@ -92,6 +97,7 @@ public class ZoomTouchHandler implements View.OnTouchListener, ScaleGestureDetec
         this.mTarget = view;
         this.mEndZoomingInterpolator = new AccelerateDecelerateInterpolator();
         this.mScaleGestureDetector = new ScaleGestureDetector(view.getContext(), this);
+        this.mGestureDetector = new GestureDetector(view.getContext(), mGestureListener);
     }
 
     @Override
@@ -99,6 +105,7 @@ public class ZoomTouchHandler implements View.OnTouchListener, ScaleGestureDetec
         if (mAnimatingZoomEnding || ev.getPointerCount() > 2) return true;
 
         mScaleGestureDetector.onTouchEvent(ev);
+        mGestureDetector.onTouchEvent(ev);
 
         int action = ev.getAction() & MotionEvent.ACTION_MASK;
 
@@ -191,7 +198,7 @@ public class ZoomTouchHandler implements View.OnTouchListener, ScaleGestureDetec
 
         final var touchListener = getZoomTouchListener();
         if (touchListener != null) {
-            touchListener.onZoomStarted();
+            touchListener.onImageZoomStarted();
         }
     }
 
@@ -218,33 +225,8 @@ public class ZoomTouchHandler implements View.OnTouchListener, ScaleGestureDetec
         float progress = (view.getScaleX() - MIN_SCALE_FACTOR) / (MAX_SCALE_FACTOR - MIN_SCALE_FACTOR);
         final var listener = getZoomTouchListener();
         if (listener != null) {
-            Log.d("TAG", String.format("onImageScaled progress=%s scale=%s", progress, mScaleFactor));
-            listener.onImageScaled(progress);
+            listener.onImageZoomed(progress);
         }
-        /*
-        final View view = mZoomableView;
-        if (view == null) return;
-
-        rect.set(view.getLeft(), view.getTop(), view.getRight(), view.getBottom());
-
-        Matrix matrix = view.getMatrix();
-        matrix.mapRect(rect);
-
-        if (prevTop == 0) {
-            prevTop = rect.top;
-        }
-        if (prevBottom == 0) {
-            prevBottom = rect.bottom;
-        }
-
-        final var touchListener = getZoomTouchListener();
-        if (touchListener != null) {
-            touchListener.onImageScaled(rect.top - prevTop, rect.bottom - prevBottom);
-        }
-
-        prevTop = rect.top;
-        prevBottom = rect.bottom;
-        */
     }
 
     @Override

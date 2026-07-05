@@ -8,7 +8,6 @@ import android.os.Handler
 import android.os.Looper
 import android.os.Message
 import android.util.AttributeSet
-import android.util.Log
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.graphics.withClip
 import com.axel_stein.pizzatestapp.ext.loadAsset
@@ -24,9 +23,7 @@ class SplashPizzaView @JvmOverloads constructor(
 
     private val path = Path()
     private val oval = RectF()
-    private val sweepAngles = listOf(
-        0f, 45f, 90f, 135f, 180f, 225f, 270f, 315f, 360f
-    )
+    private val sweepAngles = listOf(0f, 45f, 90f, 135f, 180f, 225f, 270f, 315f, 360f)
 
     private val currentSweepAngle: Float
         get() = sweepAngles.getOrNull(currentSweepIndex) ?: 0f
@@ -35,8 +32,6 @@ class SplashPizzaView @JvmOverloads constructor(
     private val handler = object : Handler(Looper.getMainLooper()) {
         override fun handleMessage(msg: Message) {
             if (msg.what == MSG_NEXT_STEP) {
-                Log.e("TAG", "handleMessage currentSweepIndex=$currentSweepIndex isAppeared=$isAppeared")
-
                 currentSweepIndex++
                 postInvalidateOnAnimation()
 
@@ -59,8 +54,6 @@ class SplashPizzaView @JvmOverloads constructor(
             if (field == value) return
             field = value
 
-            Log.e("TAG", "isAppeared=$value")
-
             if (value) {
                 animate().cancel()
 
@@ -75,12 +68,17 @@ class SplashPizzaView @JvmOverloads constructor(
             }
         }
 
+    var onDisappeared: () -> Unit = {}
+
     private fun animateDisappear() {
         handler.removeCallbacksAndMessages(null)
         currentSweepIndex = sweepAngles.lastIndex
         postInvalidateOnAnimation()
 
+        onDisappeared()
+
         animate()
+            .setDuration(100)
             .scaleX(0f)
             .scaleY(0f)
             .alpha(0f)

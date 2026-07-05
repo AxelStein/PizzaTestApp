@@ -33,6 +33,7 @@ class ErrorLayout @JvmOverloads constructor(
     fun setError(error: Throwable?) {
         isVisible = error != null
         if (error != null) {
+            binding.errAnimView.playAnimation()
             binding.errMessage.text = if (error.isNetworkError()) {
                 context.getString(R.string.error_network)
             } else {
