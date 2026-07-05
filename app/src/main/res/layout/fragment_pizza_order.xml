@@ -8,6 +8,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.axel_stein.pizzatestapp.ui.components.SplashPizzaView
+        android:id="@+id/splashView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginHorizontal="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.axel_stein.pizzatestapp.ui.components.ErrorLayout
+        android:id="@+id/errorLayout"
+        android:layout_marginHorizontal="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <com.axel_stein.pizzatestapp.ui.components.PizzaOrderToolbar
         android:id="@+id/toolbar"
         app:layout_constraintTop_toTopOf="parent"
@@ -83,13 +99,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/pagerProductImages"/>
-
-    <com.axel_stein.pizzatestapp.ui.components.SplashPizzaView
-        android:id="@+id/splashView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginHorizontal="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
 
 </com.axel_stein.pizzatestapp.ui.components.PizzaOrderLayout>

@@ -30,11 +30,17 @@ class PizzaOrderViewModel : ViewModel(), KoinComponent, QuantityStepper.EventLis
         loadPizzas()
     }
 
+    fun refresh() {
+        loadPizzas()
+    }
+
     private fun loadPizzas() {
         viewModelScope.launch {
-            _uiState.update { it.copy(isLoading = true) }
+            _uiState.update {
+                PizzaOrderUiState(isLoading = true)
+            }
 
-            delay(2000)
+            delay(1000)
 
             repository.getPizzas()
                 .onSuccess { data ->
@@ -56,7 +62,7 @@ class PizzaOrderViewModel : ViewModel(), KoinComponent, QuantityStepper.EventLis
                     _uiState.update {
                         it.copy(
                             isLoading = false,
-                            errorMessage = err.message
+                            error = err
                         )
                     }
                 }

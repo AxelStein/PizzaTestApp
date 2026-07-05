@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -55,6 +54,7 @@ class PizzaOrderFragment : Fragment(R.layout.fragment_pizza_order) {
 
         binding.pizzaSizeLayout.onSizeChanged = viewModel::setPizzaSize
         binding.quantityStepper.eventListener = viewModel
+        binding.errorLayout.onRetryClick = viewModel::refresh
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -73,10 +73,12 @@ class PizzaOrderFragment : Fragment(R.layout.fragment_pizza_order) {
     private fun renderUi(state: PizzaOrderUiState) = binding?.run {
         productImageAdapter.submitList(state.items)
 
+        splashView.isAppeared = state.isLoading
+        errorLayout.setError(state.error)
+
         state.currentItem?.let { currentItem ->
             toolbar.shouldAppear = true
             root.shouldAppear = true
-            splashView.isVisible = state.isLoading
 
             quantityStepper.setQuantity(currentItem.quantity.toString())
             quantityStepper.setPrice(currentItem.price)

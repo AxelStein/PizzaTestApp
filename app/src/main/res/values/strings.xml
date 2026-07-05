@@ -6,4 +6,6 @@
     <string name="size_small">S</string>
     <string name="size_medium">M</string>
     <string name="size_large">L</string>
+    <string name="error_network">You seem to be offline. Please check your network connection and try again</string>
+    <string name="error_base">Something went wrong</string>
 </resources>

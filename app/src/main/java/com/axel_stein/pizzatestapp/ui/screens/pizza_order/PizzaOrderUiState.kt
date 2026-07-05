@@ -6,7 +6,7 @@ data class PizzaOrderUiState(
     val items: List<PizzaOrder> = listOf(),
     val currentIndex: Int = 0,
     val isLoading: Boolean = false,
-    val errorMessage: String? = null,
+    val error: Throwable? = null,
 ) {
     val currentItem: PizzaOrder?
         get() = items.getOrNull(currentIndex)

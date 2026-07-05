@@ -8,6 +8,7 @@ import android.os.Handler
 import android.os.Looper
 import android.os.Message
 import android.util.AttributeSet
+import android.util.Log
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.graphics.withClip
 import com.axel_stein.pizzatestapp.ext.loadAsset
@@ -17,7 +18,7 @@ class SplashPizzaView @JvmOverloads constructor(
 ) : AppCompatImageView(context, attrs, defStyleAttr) {
 
     companion object {
-        private const val STEP_DURATION_MS = 200L
+        private const val STEP_DURATION_MS = 150L
         private const val MSG_NEXT_STEP = 0xF1
     }
 
@@ -33,30 +34,62 @@ class SplashPizzaView @JvmOverloads constructor(
     private var currentSweepIndex = 0
     private val handler = object : Handler(Looper.getMainLooper()) {
         override fun handleMessage(msg: Message) {
-            if (currentSweepIndex == sweepAngles.size) {
-                currentSweepIndex = 0
+            if (msg.what == MSG_NEXT_STEP) {
+                Log.e("TAG", "handleMessage currentSweepIndex=$currentSweepIndex isAppeared=$isAppeared")
+
+                currentSweepIndex++
+                postInvalidateOnAnimation()
+
+                sendEmptyMessageDelayed(MSG_NEXT_STEP, STEP_DURATION_MS)
+
+                if (currentSweepIndex == sweepAngles.size) {
+                    if (!isAppeared) {
+                        animateDisappear()
+                        return
+                    } else {
+                        currentSweepIndex = 0
+                    }
+                }
             }
-
-            currentSweepIndex++
-            postInvalidateOnAnimation()
-
-            sendEmptyMessageDelayed(MSG_NEXT_STEP, STEP_DURATION_MS)
         }
+    }
+
+    var isAppeared: Boolean = false
+        set(value) {
+            if (field == value) return
+            field = value
+
+            Log.e("TAG", "isAppeared=$value")
+
+            if (value) {
+                animate().cancel()
+
+                currentSweepIndex = 0
+                scaleX = 1f
+                scaleY = 1f
+                alpha = 1f
+                handler.sendEmptyMessageDelayed(MSG_NEXT_STEP, STEP_DURATION_MS)
+                postInvalidateOnAnimation()
+            } else if (currentSweepIndex == 0) {
+                animateDisappear()
+            }
+        }
+
+    private fun animateDisappear() {
+        handler.removeCallbacksAndMessages(null)
+        currentSweepIndex = sweepAngles.lastIndex
+        postInvalidateOnAnimation()
+
+        animate()
+            .scaleX(0f)
+            .scaleY(0f)
+            .alpha(0f)
+            .start()
     }
 
     override fun onFinishInflate() {
         super.onFinishInflate()
         loadAsset("splash.png")
-    }
-
-    override fun onWindowVisibilityChanged(visibility: Int) {
-        super.onWindowVisibilityChanged(visibility)
-        if (visibility == VISIBLE) {
-            currentSweepIndex = 0
-            handler.sendEmptyMessageDelayed(MSG_NEXT_STEP, STEP_DURATION_MS)
-        } else {
-            handler.removeCallbacksAndMessages(null)
-        }
     }
 
     private fun setupPath(path: Path, sweepAngle: Float) {

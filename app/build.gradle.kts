@@ -53,6 +53,7 @@ dependencies {
     implementation(libs.retrofit.coroutines)
     implementation(libs.koin.android)
     implementation(libs.dynamic.animation)
+    implementation(libs.lottie)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

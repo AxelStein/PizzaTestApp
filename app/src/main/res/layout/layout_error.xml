@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/errAnimView"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        app:lottie_autoPlay="true"
+        app:lottie_rawRes="@raw/error"
+        app:lottie_repeatMode="restart"/>
+
+    <TextView
+        android:id="@+id/errMessage"
+        style="@style/TextHeader3"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="@string/error_network"/>
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:id="@+id/btnRetry"
+        style="@style/PrimaryButton"
+        android:layout_gravity="center_horizontal"
+        android:text="Try again"/>
+
+</LinearLayout>
