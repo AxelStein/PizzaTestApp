@@ -34,7 +34,7 @@ class PizzaOrderLayout @JvmOverloads constructor(
         false
     )
     private val productImageAdapter = PizzaImageAdapter()
-    private val arcDrawable = ArcDrawable()
+    private val arcDrawable = ArcDrawable(context)
 
     var shouldAppear = false
         set(value) {
@@ -132,27 +132,6 @@ class PizzaOrderLayout @JvmOverloads constructor(
         pizzaSizeLayout.currentSize = item.size
     }
 
-    private fun createArcPathFromFabs() {
-        arcDrawable.createArcPathFromPoints(
-            getFabCenter(findViewById(R.id.fabSizeSmall)),
-            getFabCenter(findViewById(R.id.fabSizeMedium)),
-            getFabCenter(findViewById(R.id.fabSizeLarge)),
-        )
-    }
-
-    private fun getFabCenter(child: View): PointF {
-        val childLocation = IntArray(2)
-        child.getLocationOnScreen(childLocation)
-
-        val relativeX = (childLocation[0]).toFloat()
-        val relativeY = (childLocation[1]).toFloat()
-
-        val centerX = relativeX + (child.width / 2f)
-        val centerY = relativeY + (child.height / 2f) - binding.pizzaSizeLayout.translationY
-
-        return PointF(centerX, centerY)
-    }
-
     private fun animateAppearance() {
         alpha = 0f
         animate()
@@ -188,6 +167,26 @@ class PizzaOrderLayout @JvmOverloads constructor(
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         super.onLayout(changed, left, top, right, bottom)
         createArcPathFromFabs()
+    }
+
+    private fun createArcPathFromFabs() {
+        arcDrawable.createArcPathFromPoints(
+            getFabCenter(findViewById(R.id.fabSizeMedium)),
+            measuredWidth.toFloat()
+        )
+    }
+
+    private fun getFabCenter(child: View): PointF {
+        val childLocation = IntArray(2)
+        child.getLocationOnScreen(childLocation)
+
+        val relativeX = (childLocation[0]).toFloat()
+        val relativeY = (childLocation[1]).toFloat()
+
+        val centerX = relativeX + (child.width / 2f)
+        val centerY = relativeY + (child.height / 2f) - binding.pizzaSizeLayout.translationY
+
+        return PointF(centerX, centerY)
     }
 
     override fun onImageZoomStarted() = binding.run {}
